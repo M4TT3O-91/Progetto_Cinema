@@ -1,15 +1,12 @@
 ﻿using Cinema.Models;
 
-namespace Cinema.DataHelper.Interface
+namespace Cinema.DataManager.Interface
 {
     public interface IFilmDataManager
     {
-        public IEnumerable<MoviesRoomsViewModels> GetMovieRoomByCinemaID(int cinemaID);
-
+        public FilmsViewModels GetFilmByID(int id);
         public int AddNewFilm(FilmsViewModels film);
         public bool DeleteFilmByID(int id);
-
-
         public void ClearMovieRoom(int roomID);
 
     }

@@ -1,18 +1,16 @@
-﻿using Cinema.DataHelper.Interface;
+﻿using Cinema.DataManager.Interface;
 using Cinema.Models;
 using System.Data.SqlClient;
 
-namespace Cinema.DataHelper
+namespace Cinema.DataManager
 {
-    public class SqlFilmHelper : IFilmDataManager
+    public class SqlFilmManager : IFilmDataManager
     {
         private readonly string _connectionString;
-        public SqlFilmHelper(string connectionString)
+        public SqlFilmManager(string connectionString)
         {
             _connectionString = connectionString;
         }
-
-
 
         public int AddNewFilm(FilmsViewModels film)
         {
@@ -41,6 +39,11 @@ namespace Cinema.DataHelper
             return Convert.ToInt32(command.ExecuteScalar());
         }
 
+        public void ClearMovieRoom(int roomID)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool DeleteFilmByID(int id)
         {
             var query = @"DELETE FROM Films
@@ -54,40 +57,27 @@ namespace Cinema.DataHelper
             return command.ExecuteNonQuery() != 0;
         }
 
-        public IEnumerable<MoviesRoomsViewModels> GetMovieRoomByCinemaID(int cinemaID)
+        public FilmsViewModels GetFilmByID(int id)
         {
             using var connection = new SqlConnection(_connectionString);
             connection.Open();
 
-            var query = "SELECT * FROM MovieRooms WHERE CinemaID = @CinemaID;";
+            var query = "SELECT * FROM Films WHERE FilmID = @FilmID;";
 
             using var command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("CinemaID", cinemaID);
+            command.Parameters.AddWithValue("FilmID", id);
             using var reader = command.ExecuteReader();
-
+            var movie = new FilmsViewModels();
             while (reader.Read())
             {
-                yield return new MoviesRoomsViewModels
-                {
-                    ID = int.Parse(reader["RoomID"].ToString()),
-                    CinemaID = int.Parse(reader["CinemaID"].ToString()),
-                    MaxSeatings = int.Parse(reader["MaxSeatings"].ToString()),
-                    Seatings = int.Parse(reader["Seatings"].ToString()),
-                    FilmID = int.Parse(reader["FilmID"].ToString()),
-                };
+                movie.ID = int.Parse(reader["FilmID"].ToString());
+                movie.Author = reader["Author"].ToString();
+                movie.Title = reader["Title"].ToString();
+                movie.Duration = decimal.Parse(reader["Duration"].ToString());
+                movie.Producer = reader["Producer"].ToString();
+                movie.Genre = reader["Genre"].ToString();
             }
+            return movie;
         }
-
-        public void AddSpectatorToMovieRoom(int roomID)
-        {
-            
-        }
-
-        public void ClearMovieRoom(int roomID)
-        {
-            throw new NotImplementedException();
-        }
-
-
     }
 }

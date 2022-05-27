@@ -1,11 +1,9 @@
 ﻿using Cinema.Models;
-
-namespace Cinema.DataHelper.Interface
+namespace Cinema.DataManager.Interface
 {
     public interface ITicketDataManager
     {
-        public int AddTicket(TicketsViewModels ticket);
-
-        public bool InvalidateTicketByRoomID(int roomID, bool state);
+        public int AddTicket(TicketsViewModels ticket, DateTime birthDate);
+        public bool ChangeTicketStateByRoomID(int roomID, bool state);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Cinema.DataHelper.Interface
+﻿namespace Cinema.DataManager.Interface
 {
     public interface ICinemaDataManager
     {

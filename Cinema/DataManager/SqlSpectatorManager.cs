@@ -1,8 +1,8 @@
-﻿using Cinema.DataHelper.Interface;
+﻿using Cinema.DataManager.Interface;
 using Cinema.Models;
 using System.Data.SqlClient;
 
-namespace Cinema.DataHelper
+namespace Cinema.DataManager
 {
     public class SqlSpectatorManager : ISpectatorDataManager
     {

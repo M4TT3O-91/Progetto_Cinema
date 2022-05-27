@@ -6,12 +6,12 @@ namespace TestCinemaProject
     public class FilmTests
     {
 
-        private SqlFilmHelper _sqlFilmHelper;
+        private SqlFilmManager _sqlFilmHelper;
 
         [SetUp]
         public void Setup()
         {
-            _sqlFilmHelper = new SqlFilmHelper("Server = LAPTOP-0AAVA4N0; Database = CinemaProject; Trusted_Connection = True;");
+            _sqlFilmHelper = new SqlFilmManager("Server = LAPTOP-0AAVA4N0; Database = CinemaProject; Trusted_Connection = True;");
         }
 
         [Test]

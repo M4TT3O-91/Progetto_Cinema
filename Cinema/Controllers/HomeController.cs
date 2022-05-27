@@ -1,4 +1,5 @@
-﻿using Cinema.Models;
+﻿using Cinema.DataManager.Interface;
+using Cinema.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,14 +8,21 @@ namespace Cinema.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IFilmDataManager _filmDataManager;
+        private readonly IMovieRoomsDataManager _movieRoomsDataManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IFilmDataManager filmDataManager, IMovieRoomsDataManager movieRoomsDataManager)
         {
             _logger = logger;
+            _filmDataManager = filmDataManager;
+            _movieRoomsDataManager = movieRoomsDataManager;
         }
 
         public IActionResult Index()
         {
+            var film = _filmDataManager.get
+            
+            
             return View();
         }
 

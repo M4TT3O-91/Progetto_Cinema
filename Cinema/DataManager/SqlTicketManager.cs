@@ -1,5 +1,6 @@
-﻿using Cinema.DataHelper.Interface;
+﻿using Cinema.DataManager.Interface;
 using Cinema.Models;
+using Cinema.Support;
 using System.Data.SqlClient;
 
 namespace Cinema.DataManager
@@ -13,8 +14,12 @@ namespace Cinema.DataManager
             _connectionString = connectionString;
         }
 
-        public int AddTicket(TicketsViewModels ticket)
+        public int AddTicket(TicketsViewModels ticket, DateTime birthDate)
         {
+            if (Helper.IsforbiddenUnder14(birthDate))
+                throw new Exception("This Film is forbidden under 14 years old");
+
+            ticket = Support.Helper.ApplyDiscount(ticket, birthDate);
             var query = @" INSERT INTO [dbo].[Tickets]
                                ([Price]
                                ,[Discount]
@@ -36,7 +41,7 @@ namespace Cinema.DataManager
             return Convert.ToInt32(command.ExecuteScalar());
         }
 
-        public bool InvalidateTicketByRoomID(int roomID, bool state)
+        public bool ChangeTicketStateByRoomID(int roomID, bool state)
         {
             var query = @"UPDATE Tickets
                             SET IsValid = @state
@@ -51,5 +56,7 @@ namespace Cinema.DataManager
         }
 
         
+
     }
+
 }

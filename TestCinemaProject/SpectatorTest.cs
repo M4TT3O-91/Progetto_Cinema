@@ -1,4 +1,4 @@
-﻿using Cinema.DataHelper;
+﻿using Cinema.DataManager;
 using Cinema.Models;
 
 namespace TestCinemaProject
@@ -6,12 +6,12 @@ namespace TestCinemaProject
     public class SpectatoTests
     {
 
-        private SqlSpectatorManager _sqlSpectatorManager;
+        private SqlTicketManager _sqlSpectatorManager;
 
         [SetUp]
         public void Setup()
         {
-            _sqlSpectatorManager = new SqlSpectatorManager("Server = LAPTOP-0AAVA4N0; Database = CinemaProject; Trusted_Connection = True;");
+            _sqlSpectatorManager = new SqlTicketManager("Server = LAPTOP-0AAVA4N0; Database = CinemaProject; Trusted_Connection = True;");
         }
 
         [Test]
