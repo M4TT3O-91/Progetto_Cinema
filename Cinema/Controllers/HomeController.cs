@@ -20,10 +20,17 @@ namespace Cinema.Controllers
 
         public IActionResult Index()
         {
-            var film = _filmDataManager.get
             
+
+            var rooms = _movieRoomsDataManager.GetMovieRoomByCinemaID(1);
+            foreach (var item in rooms)
+            {
+                var film = _filmDataManager.GetFilmByID(item.FilmID);
+                item.FilmTitle = film.Title;
+
+            }
             
-            return View();
+            return View(rooms);
         }
 
         public IActionResult Privacy()

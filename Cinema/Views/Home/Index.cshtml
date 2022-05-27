@@ -1,8 +1,41 @@
-﻿@model IEnumerable<ProjectCinemaViewModels>
+﻿@model IEnumerable<MoviesRoomsViewModels>
+
 @{
-    ViewData["Title"] = "Lista dei Film";
+    ViewBag.Title = "Index Movies room";
 }
 
-<div class="text-center">
+<h1 class="display-4">Lista Impiegati</h1>
+<p class="text-right">@Html.ActionLink("Add new Movie Room","Insert")<p/>
     
-</div>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.ID)</th>
+        <th>@Html.DisplayNameFor(model => model.MaxSeatings)</th>
+        <th>@Html.DisplayNameFor(model => model.Seatings)</th>
+        <th>@Html.DisplayNameFor(model => model.FilmTitle)</th>
+    </tr>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.MaxSeatings</td>
+                <td>@item.Seatings</td>
+                <td>@item.FilmTitle</td>
+                <td>
+                    
+                    @Html.ActionLink("Detail","Detail",new {ID = item.ID})|
+                    @Html.ActionLink("Delete","Delete",new {ID = item.ID})
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="5" class="text-center"> No movie rooms Find</td>
+        </tr>
+    }
+</table>

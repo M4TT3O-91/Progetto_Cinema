@@ -15,5 +15,7 @@ namespace Cinema.Models
 
         [PositiveNumber(ErrorMessage ="Seating must be a positive number")]
         public int Seatings { get; set; }
+
+        public string FilmTitle { get; set; }
     }
 }
