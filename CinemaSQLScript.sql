@@ -31,7 +31,7 @@ Duration NUMERIC,
 
 create table MovieRooms(
 RoomID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-CinemaID INT NOT NULL REFERENCES Cinema,
+CinemaID INT NOT NULL REFERENCES Cinemas,
 Seatings INT NOT NULL,
 FilmID INT NOT NULL REFERENCES  Films, 
 )
