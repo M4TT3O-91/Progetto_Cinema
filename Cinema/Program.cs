@@ -1,10 +1,12 @@
 using Cinema.DataHelper;
+using Cinema.DataHelper.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IDataHelper, SqlDataHelper>(_=> new SqlDataHelper(builder.Configuration.GetConnectionString("SQLDb")));
+builder.Services.AddSingleton<IFilmDataManager, SqlFilmHelper>(_=> new SqlFilmHelper(builder.Configuration.GetConnectionString("SQLDb")));
+builder.Services.AddSingleton<ISpectatorDataManager, SqlSpectatorManager>(_=> new SqlSpectatorManager(builder.Configuration.GetConnectionString("SQLDb")));
 
 var app = builder.Build();
 
