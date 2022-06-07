@@ -1,4 +1,5 @@
 using Cinema.DataHelper;
+using Cinema.DataManager;
 using Cinema.Models;
 
 namespace TestCinemaProject
@@ -17,8 +18,8 @@ namespace TestCinemaProject
         [Test]
         public void Get_Movies_passing_Movies_Room_ID()
         {
-            bool res = _sqlFilmHelper.GetMovieRoomByCinemaID(1).Any();
-            Assert.IsTrue(res);
+            var res = _sqlFilmHelper.GetFilmByID(1);
+            Assert.NotNull(res);
         }
 
         [Test]
